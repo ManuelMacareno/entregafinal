@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Tienda de Productos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="description"
+        content="Bienvenido a Mi Tienda Online. Descubre productos exclusivos de tecnología, moda y mucho más. Calidad y precios increíbles.">
+</head>
+
+<body>
+    <header>
+        <h1>Mi Tienda Online</h1>
+        <nav aria-label="Menú de navegación principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="reseñas.html">Reseñas</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bienvenida" role="region" aria-labelledby="bienvenida-title">
+            <h2 id="bienvenida-title">Bienvenido a Nuestra Tienda</h2>
+            <p>¡Explora nuestros productos exclusivos y encuentra lo que necesitas! Tenemos una amplia variedad de
+                artículos, toda la tecnologia a precios increíbles.</p>
+        </section>
+
+        <section id="productos" class="productos" role="region" aria-labelledby="productos-title">
+            <h2 id="productos-title">Productos Destacados</h2>
+            <div class="productos-lista">
+                <article class="producto-item">
+                    <img src="https://images.fravega.com/f300/60377252c47a065e4a6bb55660950386.jpg.webp"
+                        alt="Imagen del Producto 1">
+                    <h3>Producto 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, itaque!</p>
+                    <button aria-label="Añadir Producto 1 al carrito">Añadir al carrito</button>
+                </article>
+                <article class="producto-item">
+                    <img src="https://images.fravega.com/f300/80b998b247b2c26d8bc31d03f9343027.jpg.webp"
+                        alt="Imagen del Producto 2">
+                    <h3>Producto 2</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, voluptatibus.</p>
+                    <button aria-label="Añadir Producto 2 al carrito">Añadir al carrito</button>
+                </article>
+                <article class="producto-item">
+                    <img src="https://electropc.com.ar/wp-content/uploads/DISENO-AVANZADO-PAGINA-300x300.webp"
+                        alt="Imagen del Producto 3">
+                    <h3>Producto 3</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, facilis.</p>
+                    <button aria-label="Añadir Producto 3 al carrito">Añadir al carrito</button>
+                </article>
+            </div>
+            <a href="productos.html" class="ver-mas">Ver todos los productos</a>
+        </section>
+
+        <section id="reseñas" class="reseñas" role="region" aria-labelledby="reseñas-title">
+            <h2 id="reseñas-title">Lo que dicen nuestros clientes</h2>
+            <div class="testimonios-destacados">
+                <blockquote class="testimonio-item">
+                    <p>"Excelente calidad y servicio. El producto llegó en tiempo récord, y la calidad es excelente.
+                        Estoy muy satisfecho con la compra y el proceso de atención al cliente. ¡Volveré a comprar
+                        pronto!"</p>
+                    <footer>- Juan Pérez</footer>
+                </blockquote>
+                <blockquote class="testimonio-item">
+                    <p>"Los productos llegaron rápido y bien embalados. Muy satisfecha. Me gustó mucho la variedad que
+                        ofrecen en la tienda. Sin duda, recomendaré a mis amigos y familiares."</p>
+                    <footer>- Laura González</footer>
+                </blockquote>
+            </div>
+            <a href="reseñas.html" class="ver-mas">Ver todas las reseñas</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mi Tienda Online. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
