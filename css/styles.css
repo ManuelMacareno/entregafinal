@@ -20,13 +20,13 @@ html,
 body {
     height: 100%;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-family: Arial, sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-texto);
 }
