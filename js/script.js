@@ -91,7 +91,7 @@ function mostrarProductosDesdeCache(productos, cargarTodos, productosContainer) 
 
         const agregarAlCarritoBtn = producto.querySelector('button');
         agregarAlCarritoBtn.addEventListener('click', function (event) {
-            event.stopPropagation(); 
+            event.stopPropagation();
             const productoId = producto.getAttribute('data-id');
             const productoCompleto = productos.find(p => p.id == productoId);
 
@@ -125,7 +125,8 @@ function mostrarAlerta(mensaje) {
 
     setTimeout(() => {
         alerta.remove();
-    }, 5000);  
+    }, 5000);
+}
 
 function cargarCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -180,4 +181,5 @@ function eliminarProducto(index) {
 
     cargarCarrito();
 }
+
 

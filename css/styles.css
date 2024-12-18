@@ -702,8 +702,8 @@ button:hover {
 
 @media (min-width: 768px) {
     .eliminar-producto {
-        max-width: 50px; 
-        width: 100%; 
+        max-width: 50px;
+        width: 100%;
     }
 
     #total-container {
