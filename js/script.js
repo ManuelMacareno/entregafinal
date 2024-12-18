@@ -81,7 +81,6 @@ function mostrarProductosDesdeCache(productos, cargarTodos, productosContainer) 
     const descripcionProducto = document.getElementById('descripcion-producto');
 
     productoElements.forEach(producto => {
-        // Mostrar modal al hacer clic en el producto
         producto.addEventListener('click', function () {
             modal.style.display = 'flex';
             const productoId = producto.getAttribute('data-id');
@@ -90,33 +89,26 @@ function mostrarProductosDesdeCache(productos, cargarTodos, productosContainer) 
             descripcionProducto.textContent = productoCompleto.description;
         });
 
-        // Añadir producto al carrito
         const agregarAlCarritoBtn = producto.querySelector('button');
         agregarAlCarritoBtn.addEventListener('click', function (event) {
-            event.stopPropagation();  // Evita que se abra el modal cuando se hace clic en "Añadir al carrito"
+            event.stopPropagation(); 
             const productoId = producto.getAttribute('data-id');
             const productoCompleto = productos.find(p => p.id == productoId);
 
-            // Obtener el carrito del localStorage o inicializar uno vacío
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-            // Añadir el producto al carrito
             carrito.push(productoCompleto);
 
-            // Guardar el carrito actualizado en localStorage
             localStorage.setItem('carrito', JSON.stringify(carrito));
 
-            // Alerta de producto agregado
             mostrarAlerta('Producto añadido al carrito!');
         });
     });
 
-    // Cerrar el modal
     cerrarModal.addEventListener('click', function () {
         modal.style.display = 'none';
     });
 
-    // Cerrar modal si se hace clic fuera de él
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
             modal.style.display = 'none';
@@ -133,8 +125,7 @@ function mostrarAlerta(mensaje) {
 
     setTimeout(() => {
         alerta.remove();
-    }, 5000);  // El mensaje se eliminará después de 2 segundos
-}
+    }, 5000);  
 
 function cargarCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
