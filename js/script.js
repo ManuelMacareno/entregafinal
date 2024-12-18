@@ -138,38 +138,37 @@ function mostrarAlerta(mensaje) {
 
 function cargarCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
     const carritoContainer = document.getElementById('carrito-container');
     const totalContainer = document.getElementById('total');
 
-    // Si no hay productos en el carrito, mostrar un mensaje
     if (carrito.length === 0) {
         carritoContainer.innerHTML = '<p>No hay productos en el carrito.</p>';
         totalContainer.textContent = '0.00';
         return;
     }
 
-    // Mostrar los productos en el carrito
     let carritoHTML = '';
     let total = 0;
 
     carrito.forEach((producto, index) => {
         carritoHTML += `
             <div class="producto-carrito">
-                <div class="producto-detalles">
-                    <h4>${producto.title}</h4>
-                    <p>Precio: $${producto.price}</p>
+                <div class="producto-info">
+                    <img src="${producto.image}" alt="Imagen de ${producto.title}">
+                    <div class="producto-detalles">
+                        <h4>${producto.title}</h4>
+                    </div>
                 </div>
-                <button class="eliminar-producto" data-index="${index}">Eliminar</button>
+                <span class="producto-precio">$${producto.price.toFixed(2)}</span>
+                <button class="eliminar-producto" data-index="${index}">X</button>
             </div>
         `;
         total += producto.price;
     });
 
     carritoContainer.innerHTML = carritoHTML;
-    totalContainer.textContent = total.toFixed(2);  // Mostrar el total con 2 decimales
+    totalContainer.textContent = total.toFixed(2);
 
-    // Agregar evento para manejar la eliminación de productos
     const botonesEliminar = document.querySelectorAll('.eliminar-producto');
     botonesEliminar.forEach(boton => {
         boton.addEventListener('click', function (event) {
@@ -180,17 +179,14 @@ function cargarCarrito() {
 }
 
 
+
 function eliminarProducto(index) {
-    // Obtener el carrito actual desde localStorage
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Eliminar el producto del carrito
     carrito.splice(index, 1);
 
-    // Guardar el carrito actualizado en localStorage
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
-    // Volver a cargar el carrito actualizado
     cargarCarrito();
 }
 
