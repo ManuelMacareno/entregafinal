@@ -2,11 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM completamente cargado');
 
     if (window.location.pathname.includes('productos.html')) {
-        cargarProductos(true); 
+        cargarProductos(true);
     }
 
     if (window.location.pathname.includes('index.html')) {
         cargarProductos(false);
+    }
+
+    if (window.location.pathname.includes('carrito.html')) {
+        cargarCarrito();
     }
 });
 
@@ -63,7 +67,7 @@ function mostrarProductosDesdeCache(productos, cargarTodos, productosContainer) 
                     <figcaption>${descripcionCorta}</figcaption>
                 </figure>
                 <p>Precio: $${producto.price}</p>
-                <button aria-label="Añadir ${producto.title} al carrito">Añadir al carrito</button>
+                <button aria-label="Añadir ${producto.title} al carrito" class="btn btn-primary">Añadir al carrito</button>
             </article>
         `;
     });
@@ -77,22 +81,116 @@ function mostrarProductosDesdeCache(productos, cargarTodos, productosContainer) 
     const descripcionProducto = document.getElementById('descripcion-producto');
 
     productoElements.forEach(producto => {
+        // Mostrar modal al hacer clic en el producto
         producto.addEventListener('click', function () {
-            modal.style.display = 'flex'; 
+            modal.style.display = 'flex';
             const productoId = producto.getAttribute('data-id');
             const productoCompleto = productos.find(p => p.id == productoId);
             nombreProducto.textContent = productoCompleto.title;
             descripcionProducto.textContent = productoCompleto.description;
         });
+
+        // Añadir producto al carrito
+        const agregarAlCarritoBtn = producto.querySelector('button');
+        agregarAlCarritoBtn.addEventListener('click', function (event) {
+            event.stopPropagation();  // Evita que se abra el modal cuando se hace clic en "Añadir al carrito"
+            const productoId = producto.getAttribute('data-id');
+            const productoCompleto = productos.find(p => p.id == productoId);
+
+            // Obtener el carrito del localStorage o inicializar uno vacío
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Añadir el producto al carrito
+            carrito.push(productoCompleto);
+
+            // Guardar el carrito actualizado en localStorage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+
+            // Alerta de producto agregado
+            mostrarAlerta('Producto añadido al carrito!');
+        });
     });
 
+    // Cerrar el modal
     cerrarModal.addEventListener('click', function () {
         modal.style.display = 'none';
     });
 
+    // Cerrar modal si se hace clic fuera de él
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
             modal.style.display = 'none';
         }
     });
 }
+
+function mostrarAlerta(mensaje) {
+    const alerta = document.createElement('div');
+    alerta.classList.add('alerta');
+    alerta.textContent = mensaje;
+
+    document.body.appendChild(alerta);
+
+    setTimeout(() => {
+        alerta.remove();
+    }, 5000);  // El mensaje se eliminará después de 2 segundos
+}
+
+function cargarCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    const carritoContainer = document.getElementById('carrito-container');
+    const totalContainer = document.getElementById('total');
+
+    // Si no hay productos en el carrito, mostrar un mensaje
+    if (carrito.length === 0) {
+        carritoContainer.innerHTML = '<p>No hay productos en el carrito.</p>';
+        totalContainer.textContent = '0.00';
+        return;
+    }
+
+    // Mostrar los productos en el carrito
+    let carritoHTML = '';
+    let total = 0;
+
+    carrito.forEach((producto, index) => {
+        carritoHTML += `
+            <div class="producto-carrito">
+                <div class="producto-detalles">
+                    <h4>${producto.title}</h4>
+                    <p>Precio: $${producto.price}</p>
+                </div>
+                <button class="eliminar-producto" data-index="${index}">Eliminar</button>
+            </div>
+        `;
+        total += producto.price;
+    });
+
+    carritoContainer.innerHTML = carritoHTML;
+    totalContainer.textContent = total.toFixed(2);  // Mostrar el total con 2 decimales
+
+    // Agregar evento para manejar la eliminación de productos
+    const botonesEliminar = document.querySelectorAll('.eliminar-producto');
+    botonesEliminar.forEach(boton => {
+        boton.addEventListener('click', function (event) {
+            const index = event.target.getAttribute('data-index');
+            eliminarProducto(index);
+        });
+    });
+}
+
+
+function eliminarProducto(index) {
+    // Obtener el carrito actual desde localStorage
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    // Eliminar el producto del carrito
+    carrito.splice(index, 1);
+
+    // Guardar el carrito actualizado en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Volver a cargar el carrito actualizado
+    cargarCarrito();
+}
+

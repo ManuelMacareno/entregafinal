@@ -419,6 +419,11 @@ h2 {
     margin-bottom: 20px;
 }
 
+#contacto h2,
+#carrito h2 {
+    color: var(--color-principal);
+}
+
 .form-group {
     margin-bottom: 15px;
     display: flex;
@@ -579,4 +584,118 @@ button:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.alerta {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-size: 18px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-out;
+    z-index: 1000;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-50%) translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+#carrito-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.producto-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    flex-wrap: wrap; 
+}
+
+.producto-carrito .producto-imagen img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.producto-carrito .producto-detalles {
+    flex-grow: 1;
+    padding: 0 15px;
+    text-align: left;
+}
+
+.producto-carrito h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--color-principal);
+}
+
+.producto-carrito p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.eliminar-producto {
+    background-color: #dc3545;  
+    color: white;               
+    border: none;              
+    padding: 10px 20px;         
+    border-radius: 4px;         
+    cursor: pointer;            
+    font-weight: bold;         
+}
+
+.eliminar-producto:hover {
+    background-color: #c82333;  
+}
+
+
+
+#total-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    margin-top: 20px;
+    text-align: right;
+}
+
+#total-container p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-principal);
+}
+
+#realizar-pedido {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#realizar-pedido:hover {
+    background-color: var(--color-secundario);
 }
